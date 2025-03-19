@@ -27,7 +27,7 @@ public class ListenerImplementationClass implements ITestListener, ISuiteListene
 		// spark report config
 		String time = new Date().toString().replace(" ", "_").replace(":", "_");
 		 spark = new ExtentSparkReporter("./AdvanceReport/report_"+time+".html");
-		spark.config().setDocumentTitle("HDFC result");
+		spark.config().setDocumentTitle("CRM result");
 		spark.config().setReportName("Home Page");
 		spark.config().setTheme(Theme.DARK);
 
@@ -44,14 +44,14 @@ public class ListenerImplementationClass implements ITestListener, ISuiteListene
 	}
 
 	public void onTestStart(ITestResult result) {
-		System.out.println("=====" + result.getMethod().getMethodName() + "===START======");
+		System.out.println("=====" + result.getMethod().getMethodName() + "====>START<======");
 		test = report.createTest(result.getMethod().getMethodName());
 		UtilityClassObject.setTest(test);
 		test.log(Status.INFO,result.getMethod().getMethodName()+"======>STARTED<======" );
 	}
 
 	public void onTestSuccess(ITestResult result) {
-		System.out.println("=====" + result.getMethod().getMethodName() + "=====END====");
+		System.out.println("=====" + result.getMethod().getMethodName() + "=====>END<====");
 		test.log(Status.PASS,result.getMethod().getMethodName()+"======>COMPLETED<======" );
 
 	}
