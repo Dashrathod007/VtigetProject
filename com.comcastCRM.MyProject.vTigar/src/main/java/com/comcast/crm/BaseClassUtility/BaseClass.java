@@ -1,6 +1,8 @@
 package com.comcast.crm.BaseClassUtility;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
@@ -35,17 +37,30 @@ public class BaseClass {
 
 	}
 
-	// @Parameters("BROWSER")
+	// @Parameters("BROWSER","platform"
 	@BeforeClass(groups = { "smokeTest", "regressionTest" })
+	//public void configBC(String BROWSER, String platform)
 	public void configBC() throws Exception {
 		System.out.println("====Launch the Browser======");
 
 		String Browser = flib.getDataFromPropertiesFile("browser");
+		//String Browser = flib.getDataFromPropertiesFile("browser");
+		//String url = flib.getDataFromPropertiesFile("url");
+
 		// flib.getDataFromPropertiesFile("browser");
 		/*
 		 * ChromeOptions options=new ChromeOptions();
 		 * options.addArguments("--inconginito--"); FirefoxOptions options1=new
 		 * FirefoxOptions(); options1.addArguments("--inconginito--");
+		 */		 
+		/*if(BROWSER.equals("chrome") && platform.equals("windows"){
+			 Chromeoption options=new ChromeOptions();
+			 options.setPlatformName("windows");
+			 driver=new RemoteWebDriver(new URL("HostIPAddress",options)
+			 create same for firebox,edge also
+			 
+			 
+		 }
 		 */
 
 		String url = flib.getDataFromPropertiesFile("url");

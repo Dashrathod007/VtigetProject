@@ -1,7 +1,4 @@
 package com.comcast.crm.objectrepositoryUtility;
-
-import javax.xml.xpath.XPath;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,7 +32,7 @@ public class CreatingNewSalesOrderPage {
 	private WebElement CopyShippingAddressRadioBtn;
 	@FindBy(xpath = "//input[@onclick='return copyAddressRight(EditView)']")
 	private WebElement CopyBillingAddressRadioBtn;
-	@FindBy(xpath = "//img[@title='Products']")
+	@FindBy(xpath = "//input[@name='search_text']")
 	private WebElement SearchProductTextField;
 	@FindBy(xpath = "//input[@name='search']")
 	private WebElement searchNowBtn;

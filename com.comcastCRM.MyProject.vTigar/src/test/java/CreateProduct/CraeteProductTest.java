@@ -176,12 +176,14 @@ public class CraeteProductTest extends BaseClass {
 		wlib.AlertPopupAccept(driver);
 		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Sales Order Page");
 		wlib.switchToWindowByURL(driver, "module=SalesOrder&action");
+		cnso.getAddOrganisation().click();
 		UtilityClassObject.getTest().log(Status.INFO, "Navigate to the Add Organisation PopUp");
 		wlib.switchToWindowByURL(driver, "module=Accounts&action");
 		addOrgnisationPopUp agp = new addOrgnisationPopUp(driver);
 		agp.getOrgSearchTextField().sendKeys(orgname);
 		agp.getSearchNowBtn().click();
 		driver.findElement(By.xpath("//a[text()='" + orgname + "']")).click();
+		wlib.AlertPopupAccept(driver);
 		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Sales Order Page");
 		wlib.switchToWindowByURL(driver, "module=SalesOrder&action");
 		cnso.getEndPeriodDate().clear();
@@ -197,10 +199,12 @@ public class CraeteProductTest extends BaseClass {
 		wlib.switchToWindowByURL(driver, "module=Products&action");
 		cnso.getSearchProductTextField().sendKeys(product);
 		cnso.getSearchNowBtn().click();
-		driver.findElement(By.xpath("//a[text()='" + product + "']")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'" + product + "')]")).click();
 		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Sales Order Page");
 		wlib.switchToWindowByURL(driver, "module=SalesOrder&action");
-		cnso.getProductQuntity().sendKeys(salProQty);
+		WebElement ab = cnso.getProductQuntity();
+		wlib.scrollToElement(driver, ab);
+		ab.sendKeys(salProQty);
 		cnso.getSaveBtn();
 		UtilityClassObject.getTest().log(Status.INFO, "Navigate to Invoice Page");
 		wlib.mouseMoveOnElement(driver, ele1);
@@ -212,13 +216,16 @@ public class CraeteProductTest extends BaseClass {
 		cni.getSubjectTxtField().sendKeys(InvoiceSub);
 		cni.getaddCustNo().sendKeys(invcustNo);
 		cni.getContactAddBtn().click();
+
 		UtilityClassObject.getTest().log(Status.INFO, "Navigate To Add Contact PopUp");
 		wlib.switchToWindowByURL(driver, "module=Contacts&action");
 		acp.getCustSearchTextField().sendKeys(lastname);
-		WebElement DD = acp.getSearchDropDown();
-		wlib.select(DD, "Last Name");
+		// WebElement DD = acp.getSearchDropDown();
+		// wlib.select(DD, "Last Name");
 		acp.getSearchNowBtn().click();
-		driver.findElement(By.xpath("//a[text()='" + lastname + "']")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'" + lastname + "')]")).click();
+		wlib.AlertPopupAccept(driver);
+
 		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Inoice Page");
 		wlib.switchToWindowByURL(driver, "module=Invoice&action");
 		cni.getDueDate().clear();
@@ -230,6 +237,8 @@ public class CraeteProductTest extends BaseClass {
 		agp.getOrgSearchTextField().sendKeys(orgname);
 		agp.getSearchNowBtn().click();
 		driver.findElement(By.xpath("//a[text()='" + orgname + "']")).click();
+		wlib.AlertPopupAccept(driver);
+
 		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Inoice Page");
 		wlib.switchToWindowByURL(driver, "module=Invoice&action");
 		cni.getAssignedRadioBtn();
