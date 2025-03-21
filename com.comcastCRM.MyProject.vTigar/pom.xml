@@ -49,12 +49,15 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<version>9.2.0</version>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>5.1.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.basc.framework/log4j2 -->
+
 	</dependencies>
   
 </project>
