@@ -15,7 +15,6 @@ import com.comcast.crm.objectrepositoryUtility.CreatingNewContactPage;
 import com.comcast.crm.objectrepositoryUtility.CreatingNewInvoice;
 import com.comcast.crm.objectrepositoryUtility.CreatingNewProductPage;
 import com.comcast.crm.objectrepositoryUtility.CreatingNewSalesOrderPage;
-import com.comcast.crm.objectrepositoryUtility.CreatingNewVender;
 import com.comcast.crm.objectrepositoryUtility.HomePage;
 import com.comcast.crm.objectrepositoryUtility.InvoicePage;
 import com.comcast.crm.objectrepositoryUtility.MoreLinkPopUp;
@@ -23,8 +22,6 @@ import com.comcast.crm.objectrepositoryUtility.OrganisationInfoPAge;
 import com.comcast.crm.objectrepositoryUtility.OrganisationPage;
 import com.comcast.crm.objectrepositoryUtility.ProductPage;
 import com.comcast.crm.objectrepositoryUtility.SalesOrderPage;
-import com.comcast.crm.objectrepositoryUtility.VenderInfoPage;
-import com.comcast.crm.objectrepositoryUtility.VenderPage;
 import com.comcast.crm.objectrepositoryUtility.addOrgnisationPopUp;
 import com.comcast.crm.objectrepositoryUtility.creatingNewOrganisationPage;
 
@@ -36,8 +33,7 @@ public class CreateInvoiceTest extends BaseClass {
 	public void createInvoice() throws Exception {
 		UtilityClassObject.getTest().log(Status.INFO, "Read the Data from Excel");
 		String orgname = elib.getDatafromExcel("org", 1, 2) + jlib.getRandomNumber();
-		// String firstname = elib.getDatafromExcel("Contact", 1, 2) +
-		// jlib.getRandomNumber();
+		String firstname = elib.getDatafromExcel("Contact", 1, 2) + jlib.getRandomNumber();
 		String lastname = elib.getDatafromExcel("Contact", 1, 3) + jlib.getRandomNumber();
 		String product = elib.getDatafromExcel("Product", 1, 2) + jlib.getRandomNumber();
 		String productcategory = elib.getDatafromExcel("Product", 1, 3);
@@ -49,6 +45,10 @@ public class CreateInvoiceTest extends BaseClass {
 		String salCustNo = elib.getDatafromExcel("Sales Order", 1, 1);
 		String salCustbilladress = elib.getDatafromExcel("Sales Order", 1, 3);
 		String salProQty = elib.getDatafromExcel("Sales Order", 1, 5);
+		String InvCustBillAdress = elib.getDatafromExcel("Invoice", 1, 3);
+		String InvProductQty = elib.getDatafromExcel("Invoice", 1, 5);
+		
+
 
 		UtilityClassObject.getTest().log(Status.INFO, "Navibagte to Organisation page");
 		HomePage hp = new HomePage(driver);
@@ -73,11 +73,9 @@ public class CreateInvoiceTest extends BaseClass {
 		cp.getCreateContactBtn().click();
 		UtilityClassObject.getTest().log(Status.INFO, "Create the Contact with firstname and lastname ");
 		CreatingNewContactPage cncp = new CreatingNewContactPage(driver);
-		// cncp.getFirstNameTxtField().sendKeys(firstname);
+		cncp.getFirstNameTxtField().sendKeys(firstname);
 		cncp.getLastNameTxtField().sendKeys(lastname);
 		cncp.getSaveBtn().click();
-		Thread.sleep(2000);
-		// Create a product
 		UtilityClassObject.getTest().log(Status.INFO, "Navigate to Product Page");
 		hp.getProductsLink().click();
 		ProductPage pp = new ProductPage(driver);
@@ -169,8 +167,6 @@ public class CreateInvoiceTest extends BaseClass {
 		UtilityClassObject.getTest().log(Status.INFO, "Navigate To Add Contact PopUp");
 		wlib.switchToWindowByURL(driver, "module=Contacts&action");
 		acp.getCustSearchTextField().sendKeys(lastname);
-		// WebElement DD = acp.getSearchDropDown();
-		// wlib.select(DD, "Last Name");
 		acp.getSearchNowBtn().click();
 		driver.findElement(By.xpath("//a[contains(text(),'" + lastname + "')]")).click();
 		wlib.AlertPopupAccept(driver);
@@ -187,6 +183,14 @@ public class CreateInvoiceTest extends BaseClass {
 		agp.getSearchNowBtn().click();
 		driver.findElement(By.xpath("//a[text()='" + orgname + "']")).click();
 		wlib.AlertPopupAccept(driver);
+		
+		
+		
+		
+		
+		
+		
+		
 
 		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Inoice Page");
 		wlib.switchToWindowByURL(driver, "module=Invoice&action");
@@ -194,6 +198,22 @@ public class CreateInvoiceTest extends BaseClass {
 		WebElement Assign = cni.getAssignedRadioBtn();
 		boolean assi = Assign.isSelected();
 		Assert.assertEquals(assi, true);
+		cni.getBillingAddressTxtField().sendKeys(InvCustBillAdress);
+		cni.getCopyBillingaddressRadio().click();
+		String BillAdress = cni.getBillingAddressTxtField().getText();
+		boolean Billadd = BillAdress.contains(InvCustBillAdress);
+		Assert.assertEquals(Billadd, true);
+		UtilityClassObject.getTest().log(Status.INFO, "Navigate to the Add Product PopUp");
+		wlib.switchToWindowByURL(driver, "module=Products&action");
+		cnso.getSearchProductTextField().sendKeys(product);
+		cnso.getSearchNowBtn().click();
+		driver.findElement(By.xpath("//a[contains(text(),'" + product + "')]")).click();
+		UtilityClassObject.getTest().log(Status.INFO, "Back To Create New Inoice Page");
+		wlib.switchToWindowByURL(driver, "module=Invoice&action");
+		cni.getProductQty().sendKeys(InvProductQty);
+		cni.getSaveBtn().click();
+		
+		
 	}
 
 }

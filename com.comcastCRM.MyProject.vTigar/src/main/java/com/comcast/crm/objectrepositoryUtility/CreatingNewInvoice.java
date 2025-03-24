@@ -43,6 +43,12 @@ public class CreatingNewInvoice {
 	private WebElement saveBtn;
 	@FindBy(xpath = "//input[@name='customerno']")
 	private WebElement addCustNo;
+	@FindBy(xpath = "//input[@name='qty1']")
+	private WebElement productQty;
+
+	public WebElement getProductQty() {
+		return productQty;
+	}
 
 	public WebDriver getDriver() {
 		return driver;

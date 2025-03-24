@@ -21,6 +21,11 @@ public class MoreLinkPopUp {
 	private WebElement salesOrder;
 	@FindBy(xpath = "//a[@href='index.php?module=PriceBook&action=index']")
 	private WebElement priceBook;
+	@FindBy(xpath = "//a[@name='Service Contracts']")
+	private WebElement createServiceContract;
+	public WebElement getCreateServiceContract() {
+		return createServiceContract;
+	}
 	public WebElement getPriceBook() {
 		return priceBook;
 	}
