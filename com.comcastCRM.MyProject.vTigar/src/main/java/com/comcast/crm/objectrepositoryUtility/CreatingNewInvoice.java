@@ -29,7 +29,7 @@ public class CreatingNewInvoice {
 	private WebElement assignedRadioBtn;
 	@FindBy(xpath = "//input[@name='salesorder_name']")
 	private WebElement SalesOrder;
-	@FindBy(xpath = "//input[@name='bill_street']")
+	@FindBy(xpath = "//textarea[@name='bill_street']")
 	private WebElement billingAddressTxtField;
 	@FindBy(xpath = "//input[@name='ship_street']")
 	private WebElement shippingAddressTxtField;
