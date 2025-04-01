@@ -1,4 +1,4 @@
-package CreateProduct;
+package CreateInvoice;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -29,7 +29,7 @@ import com.comcast.crm.objectrepositoryUtility.creatingNewOrganisationPage;
 
 public class CreateInvoiceTest extends BaseClass {
 
-	@Test(groups = "smokeTest")
+	@Test(groups = "regressionTest")
 	public void createInvoice() throws Exception {
 		UtilityClassObject.getTest().log(Status.INFO, "Read the Data from Excel");
 		String orgname = elib.getDatafromExcel("org", 1, 2) + jlib.getRandomNumber();
@@ -102,7 +102,6 @@ public class CreateInvoiceTest extends BaseClass {
 		WebElement savebtn = cnpp.getSaveBtn();
 		wlib.scrollToElementAndClick(driver, savebtn);
 		savebtn.click();
-
 		WebElement ele1 = hp.getMoreLink();
 		wlib.mouseMoveOnElement(driver, ele1);
 		UtilityClassObject.getTest().log(Status.INFO, "Navigate to Create New Sales Order Page");

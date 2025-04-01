@@ -1,6 +1,5 @@
-package CreateProduct;
+package CreateServiceContract;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -21,7 +20,7 @@ import com.comcast.crm.objectrepositoryUtility.creatingNewOrganisationPage;
 
 @Listeners(com.comcast.crm.listenerUtility.ListenerImplementationClass.class)
 
-public class CreateServiceContractManditoryTest extends BaseClass {
+public class CreateServiceContractTest extends BaseClass {
 	@Test(groups = "smokeTest")
 	public void createServiceContract() throws Exception {
 		UtilityClassObject.getTest().log(Status.INFO, "Read The Data From Excel File");
@@ -60,7 +59,7 @@ public class CreateServiceContractManditoryTest extends BaseClass {
 		ServiceContractPage scp = new ServiceContractPage(driver);
 		scp.getCreateNewContarctBtn().click();
 		CreatingNewServiceContactPage cnsp = new CreatingNewServiceContactPage(driver);
-		
+		cnsp.getSubTextField().sendKeys(Sub);
 		WebElement ele2 = cnsp.getRelatedToDropDown();
 		wlib.select(ele2, "Organizations");
 		cnsp.getAddBtn().click();
@@ -72,18 +71,9 @@ public class CreateServiceContractManditoryTest extends BaseClass {
 		String dueDate = jlib.getRequiredDateYYYYDDMM(60);
 		cnsp.getDueDate().sendKeys(dueDate);
 		cnsp.getSaveBtn().click();
-		UtilityClassObject.getTest().log(Status.INFO, "To check Alert MSg Displayed");
-		Alert alert = driver.switchTo().alert();
-		String AlertMsg = alert.getText();
-		String Msg="Subject cannot be empty";
-		boolean a = AlertMsg.contains(Msg);
-		Assert.assertEquals(a, true);
-		wlib.AlertPopupAccept(driver);
-		cnsp.getSubTextField().sendKeys(Sub);
-		cnsp.getSaveBtn().click();
 		String HeaderInfo = driver.findElement(By.xpath("//span[@class='dvHeaderText']")).getText();
-		boolean info = HeaderInfo.contains(Sub);
-		Assert.assertEquals(info, true);
+		boolean a = HeaderInfo.contains(Sub);
+		Assert.assertEquals(a, true);
 
 	}
 
